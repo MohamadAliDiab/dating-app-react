@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import axios from 'axios'
 import { View, StyleSheet, TouchableOpacity, Settings } from 'react-native'
 import { Text } from 'react-native-paper'
 import Background from '../components/Background'
@@ -8,35 +9,78 @@ import Button from '../components/Button'
 import TextInput from '../components/TextInput'
 import BackButton from '../components/BackButton'
 import RadioButton from '../components/RadioButton'
+import DatePicker from '../components/DatePicker'
 import { theme } from '../core/theme'
 import { emailValidator } from '../helpers/emailValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
 import { nameValidator } from '../helpers/nameValidator'
 
-export default function RegisterScreen({ navigation }) {
+export default function RegisterScreen({ navigation }){
   const [firstname, setFirstName] = useState({ value: '', error: '' })
   const [lastname, setLastName] = useState({ value: '', error: '' })
   const [email, setEmail] = useState({ value: '', error: '' })
   const [password, setPassword] = useState({ value: '', error: '' })
   const [date, setDate] = useState(new Date())
   const [open, setOpen] = useState(false)
-  const [gender, setgender] = useState(1)
+  const [gender, setgender] = useState("0")
+  const [intrested, setintrested] = useState("0")
 
   const onSignUpPressed = () => {
     const nameError = nameValidator(firstname.value)
+    const lastnameError = nameValidator(lastname.value)
     const emailError = emailValidator(email.value)
     const passwordError = passwordValidator(password.value)
     if (emailError || passwordError || nameError) {
       setFirstName({ ...firstname, error: nameError })
+      setLastName({ ...lastname, error: lastnameError })
       setEmail({ ...email, error: emailError })
       setPassword({ ...password, error: passwordError })
       return
     }
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'Dashboard' }],
+    console.log(firstname.value, lastname.value, email.value, gender, intrested, password.value);
+
+    fetch('http://127.0.0.1:8000/api/register', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+       'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "first_name": firstname.value,
+      "last_name": lastname.value,
+      "email": email.value,
+      "gender": gender,
+      "interested_in": intrested,
+      "password": password.value,
+        }),
     })
+    .then(res => res.json())
+    .then(resData=> {
+      console.log(resData);
+    });
   }
+    
+    /*axios.post('http://127.0.0.1:8000/api/register', {
+      "first_name": firstname.value,
+      "last_name": lastname.value,
+      "email": email.value,
+      "gender": gender,
+      "interested_in": intrested,
+      "password": password.value,
+    })
+    .then(function (response) {
+      console.log(response)
+      //return response
+    })
+    .catch(function (error) {
+      console.log(error)
+    });
+  }*/
+    //navigation.reset({
+    //  index: 0,
+    //  routes: [{ name: 'Dashboard' }],
+    //})
+  //}
 
   return (
     <Background>
@@ -47,7 +91,7 @@ export default function RegisterScreen({ navigation }) {
         label="First Name"
         returnKeyType="next"
         value={firstname.value}
-        onChangeText={(text) => setName({ value: text, error: '' })}
+        onChangeText={(text) => setFirstName({ value: text, error: '' })}
         error={!!firstname.error}
         errorText={firstname.error}
       />
@@ -55,7 +99,7 @@ export default function RegisterScreen({ navigation }) {
         label="Last Name"
         returnKeyType="next"
         value={lastname.value}
-        onChangeText={(text) => setName({ value: text, error: '' })}
+        onChangeText={(text) => setLastName({ value: text, error: '' })}
         error={!!lastname.error}
         errorText={lastname.error}
       />
@@ -80,13 +124,32 @@ export default function RegisterScreen({ navigation }) {
         errorText={password.error}
         secureTextEntry
       />
+
+      <DatePicker
+      date= {date} 
+      setDate={setDate}
+      open= {open}
+      setOpen= {setOpen}
+      />
+
       <RadioButton
+      text ="Gender "
       value1="0"
        text1="Male" 
        value2="1" 
        text2="Female" 
        setGender={setgender} 
        Gender={gender}
+       />
+
+       <RadioButton
+       text ="Interested in: "
+       value1="0"
+       text1="Male" 
+       value2="1" 
+       text2="Female" 
+       setGender={setintrested} 
+       Gender={intrested}
        />
 
       <Button

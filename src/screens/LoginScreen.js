@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { TouchableOpacity, StyleSheet, View } from 'react-native'
 import { Text } from 'react-native-paper'
 import Background from '../components/Background'
@@ -66,7 +67,11 @@ export default function LoginScreen({ navigation }) {
     })
     .then(function (response) {
       console.log(response)
-      //return response
+      console.log(response.data)
+
+      AsyncStorage.setItem("auth", JSON.stringify(response.data))
+      //console.log(storeData);
+     navigation.replace('main')
     })
     .catch(function (error) {
       console.log(error)
