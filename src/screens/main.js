@@ -4,6 +4,10 @@ import React, { useRef, useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { View, StyleSheet, TouchableOpacity, Settings } from 'react-native'
 //import HighligtedUser from '../components/UsersList'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import profile from './profile'
+import Dashboard from './Dashboard'
 
 export default function main ({ navigation }){
     const [user, setuser]=useState("");
@@ -43,12 +47,35 @@ export default function main ({ navigation }){
     useEffect(() => {
       getAuthState();
     }, []);
-  
+    const Tab = createBottomTabNavigator();
     return (
-      <View>
+      <Tab.Navigator
       
-  
-        </View>
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
+
+            if (route.name === 'Highlighted') {
+              iconName = focused
+                ? 'ios-information-circle'
+                : 'ios-information-circle-outline';
+            } else if (route.name === 'Highlighted') {
+              iconName = focused ? 'ios-list' : 'ios-list';
+            }else{
+              iconName = focused ? 'ios-list' : 'ios-list';
+            }
+
+            // You can return any component that you like here!
+            return <Ionicons name={iconName} size={size} color={color} />;
+          },
+          tabBarActiveTintColor: 'tomato',
+          tabBarInactiveTintColor: 'gray',
+        })}>
+        <Tab.Screen name="Highlighted" component={Dashboard} />
+        <Tab.Screen name="Users" component={Dashboard} />
+        <Tab.Screen name="profile" component={profile} />
+        
+      </Tab.Navigator>
     
     );
   }
