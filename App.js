@@ -12,6 +12,8 @@ import {
   main,
   profile,
   Card,
+  Home,
+  users,
 } from './src/screens'
 
 const Stack = createStackNavigator()
@@ -33,6 +35,8 @@ export default function App() {
           <Stack.Screen name="main" component={main} />
           <Stack.Screen name="profile" component={profile} />
           <Stack.Screen name="Card" component={Card} />
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="users" component={users} />
           <Stack.Screen
             name="ResetPasswordScreen"
             component={ResetPasswordScreen}

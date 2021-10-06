@@ -71,7 +71,7 @@ export default function LoginScreen({ navigation }) {
 
       AsyncStorage.setItem("auth", JSON.stringify(response.data))
       //console.log(storeData);
-     navigation.replace('main')
+     navigation.replace('Home')
     })
     .catch(function (error) {
       console.log(error)
