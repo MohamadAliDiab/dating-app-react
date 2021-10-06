@@ -9,7 +9,7 @@ import Button from '../components/Button'
 import TextInput from '../components/TextInput'
 import BackButton from '../components/BackButton'
 import RadioButton from '../components/RadioButton'
-import DatePicker from '../components/DatePicker'
+//import DatePicker from '../components/DatePicker1'
 import { theme } from '../core/theme'
 import { emailValidator } from '../helpers/emailValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
@@ -20,8 +20,8 @@ export default function RegisterScreen({ navigation }){
   const [lastname, setLastName] = useState({ value: '', error: '' })
   const [email, setEmail] = useState({ value: '', error: '' })
   const [password, setPassword] = useState({ value: '', error: '' })
-  const [date, setDate] = useState(new Date())
-  const [open, setOpen] = useState(false)
+  //const [date, setDate] = useState(new Date())
+  //const [open, setOpen] = useState(false)
   const [gender, setgender] = useState("0")
   const [intrested, setintrested] = useState("0")
 
@@ -56,7 +56,13 @@ export default function RegisterScreen({ navigation }){
     })
     .then(res => res.json())
     .then(resData=> {
-      console.log(resData);
+      alert("Successfully registered");
+      setFirstName({ value: '', error: '' })
+      setLastName({ value: '', error: '' })
+      setEmail({ value: '', error: '' })
+      setPassword({ value: '', error: '' })
+      setgender("0")
+      setintrested("0")
     });
   }
     
@@ -85,7 +91,6 @@ export default function RegisterScreen({ navigation }){
   return (
     <Background>
       <BackButton goBack={navigation.goBack} />
-      <Logo />
       <Header>Create Account</Header>
       <TextInput
         label="First Name"
@@ -124,16 +129,8 @@ export default function RegisterScreen({ navigation }){
         errorText={password.error}
         secureTextEntry
       />
-
-      <DatePicker
-      date= {date} 
-      setDate={setDate}
-      open= {open}
-      setOpen= {setOpen}
-      />
-
       <RadioButton
-      text ="Gender "
+      text ="User Gender "
       value1="0"
        text1="Male" 
        value2="1" 

@@ -75,6 +75,10 @@ export default function LoginScreen({ navigation }) {
     })
     .catch(function (error) {
       console.log(error)
+      setEmail({ value: '', error: '' })
+      setPassword({ value: '', error: '' })
+      alert("Incorrect Credentials")
+
     });
   }
 
@@ -85,9 +89,9 @@ export default function LoginScreen({ navigation }) {
   //}
 
   return (
-    <Background>
+ <Background>
       <BackButton goBack={navigation.goBack} />
-      <Logo />
+     
       <Header>Welcome back.</Header>
       <TextInput
         label="Email"
@@ -111,11 +115,6 @@ export default function LoginScreen({ navigation }) {
         secureTextEntry
       />
       <View style={styles.forgotPassword}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('ResetPasswordScreen')}
-        >
-          <Text style={styles.forgot}>Forgot your password?</Text>
-        </TouchableOpacity>
       </View>
       <Button mode="contained" onPress={onLoginPressed}>
         Login

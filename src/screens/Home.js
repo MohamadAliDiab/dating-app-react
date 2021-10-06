@@ -8,13 +8,7 @@ import Paragraph from '../components/Paragraph'
 export default function Home({ navigation }) {
   return (
     <Background>
-        
-      <Logo />
-      <Header>Login Template</Header>
-      <Paragraph>
-        The easiest way to start with your amazing application.
-      </Paragraph>
-      <Button
+       <Button
         mode="contained"
         onPress={() => navigation.navigate('Card')}
       >
