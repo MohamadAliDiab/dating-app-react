@@ -9,7 +9,6 @@ import {
   RegisterScreen,
   ResetPasswordScreen,
   Dashboard,
-  main,
   profile,
   Card,
   Home,
@@ -32,7 +31,7 @@ export default function App() {
           <Stack.Screen name="LoginScreen" component={LoginScreen} />
           <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
           <Stack.Screen name="Dashboard" component={Dashboard} />
-          <Stack.Screen name="main" component={main} />
+          
           <Stack.Screen name="profile" component={profile} />
           <Stack.Screen name="Card" component={Card} />
           <Stack.Screen name="Home" component={Home} />
