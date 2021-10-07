@@ -12,13 +12,31 @@ export default function Home({ navigation }) {
         mode="contained"
         onPress={() => navigation.navigate('Card')}
       >
-        Highlited
+        Highlighted Users
       </Button>
       <Button
         mode="outlined"
-        onPress={() => navigation.navigate('users')}
+        onPress={() => navigation.navigate('UserofInterest')}
       >
-        All Users
+        Find a Match
+      </Button>
+      <Button
+        mode="outlined"
+        onPress={() => navigation.navigate('Followers')}
+      >
+        Followers
+      </Button>
+      <Button
+        mode="outlined"
+        onPress={() => navigation.navigate('followedByme')}
+      >
+        Followed by me
+      </Button>
+      <Button
+        mode="outlined"
+        onPress={() => navigation.navigate('Connections')}
+      >
+        Connections
       </Button>
       <Button
         mode="outlined"

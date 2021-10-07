@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { View, StyleSheet, TouchableOpacity, Settings } from 'react-native'
-import User from './UserCard'
+import User from './UserCard_Block'
 
 
 function UsersList(props) {

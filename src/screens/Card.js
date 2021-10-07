@@ -1,50 +1,62 @@
-import * as React from 'react';
-import { useSyncRef } from 'react-aria/node_modules/@react-aria/utils';
-import BackButton from '../components/BackButton'
-import { Avatar, Button, Card, Title, Paragraph , SearchBar} from 'react-native-paper';
-const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
-var cards = [];
-const getMoviesFromApiAsync = async () => {
-  try {
-    const response = await fetch(
-      'http://127.0.0.1:8000/api/highlighted'
-    );
-    const json = await response.json();
-    json.forEach((user) => {
-      cards.push(
-        <Card key = {user.id}  style={{marginHorizontal:20}}>
-        <Card.Content>
-          <Title>{user.first_name} {user.last_name}</Title>
-          
-        </Card.Content>
-        <Card.Cover style={{aspectRatio: 1/1}} source={{ uri: 'https://picsum.photos/700' }} />
-        <Card.Actions>
-          <Button>Block</Button>
-          <Button>Favorite</Button>
-        </Card.Actions>
-       
-      </Card>
-      )
-    
-  })
-  } catch (error) {
-    console.error(error);
-  }
-};
-getMoviesFromApiAsync();
+import React, { useRef, useState, useEffect } from 'react';
+import axios from 'axios'
+//import BottomNavigation from '../components/BottomNavigation'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { View,Text, StyleSheet, TouchableOpacity, Settings } from 'react-native'
+import HighlightedUsers from '../components/UsersList_highlighted'
+import Background from '../components/Background'
+import Button from '../components/Button'
 
+export default function main ({ navigation }){
+    const [user, setuser]=useState("");
+    const [userList, setUserList]=useState([]);
+    //let userList=[];
+  
+   
+  
+  
+    function highlighted_users() {
+      let usersarray=[]
+      setUserList([])
+      axios.get(`http://127.0.0.1:8000/api/highlighted`)
+            .then((response)=>{   
+              console.log(response.data);   
+            response.data.forEach((user) => {
+              usersarray.push({
+            id:user.id,
+            firstname:user.first_name,
+            lastname:user.last_name
+          })
+         // return userList;
+        })
+        console.log("this is user list11111111111")
+          console.log(usersarray)
+          console.log(usersarray.length)
 
+          setUserList(usersarray)
+            })
+    }
 
-const MyComponent = ({ navigation }) => (
-  <>
-
-<Button
+  
+  
+   
+  
+    useEffect(() => {
+      highlighted_users();
+    }, []);
+  
+  
+  return(
+  <Background>
+    <Button
         mode="outlined"
+        color="#112240"
         onPress={() => navigation.navigate('Home')}> Go back </Button>
-  <Card>{cards}</Card>
-  </>
+    <HighlightedUsers UsersList={userList} />
+    </Background>
+
  
   
-);
+)
+}
 
-export default MyComponent;

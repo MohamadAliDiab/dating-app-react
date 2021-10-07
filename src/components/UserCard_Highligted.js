@@ -8,17 +8,14 @@ import theme from '../Core/theme'
 function UserCard (props){
   const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
   return(
-    <li style={{ marginLeft:0, width:"100%" }}>
-  <Card  style={{ backgroundColor: " WhiteSmoke", width:"100%"}}>
+    <li style={{ marginLeft:0 }}>
+  <Card  style={{ backgroundColor: " WhiteSmoke"}}>
     
     <Card.Content>
-	<Title>{props.f_name+ " "+props.l_name}</Title>
+      <Title>{props.f_name+" "+props.l_name}</Title>
     </Card.Content>
-    <Card.Cover style={{ aspectRatio: 1/1 }} source={{ url:'../assets/user.jpg'}} />
-    <Card.Actions>
-      <Button onPress={()=>props.blockfn(props.userID)}>Block</Button>
-      <Button onPress={()=>props.favoritefn(props.userID)}>Favorite</Button>
-    </Card.Actions>
+    <Card.Cover style={{ aspectRatio: 1/1 }} source={{ uri: 'https://picsum.photos/700' }} />
+  
    
   </Card>
   </li>
