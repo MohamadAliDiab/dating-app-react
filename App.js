@@ -16,7 +16,8 @@ import {
   UserofInterest,
   Connections,
   followedByme,
-  Followers
+  Followers,
+  notifications
 } from './src/screens'
 
 const Stack = createStackNavigator()
@@ -44,6 +45,7 @@ export default function App() {
           <Stack.Screen name="Followers" component={Followers} />
           <Stack.Screen name="followedByme" component={followedByme} />
           <Stack.Screen name="Connections" component={Connections} />
+          <Stack.Screen name="notifications" component={notifications} />
 
           <Stack.Screen
             name="ResetPasswordScreen"

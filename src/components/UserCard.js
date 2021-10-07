@@ -14,7 +14,7 @@ function UserCard (props){
     <Card.Content>
 	<Title>{props.f_name+ " "+props.l_name}</Title>
     </Card.Content>
-    <Card.Cover style={{ aspectRatio: 1/1 }} source={{ url:'../assets/user.jpg'}} />
+    <Card.Cover style={{ aspectRatio: 1/1 }} source={{ uri:'../assets/user.jpg'}} />
     <Card.Actions>
       <Button onPress={()=>props.blockfn(props.userID)}>Block</Button>
       <Button onPress={()=>props.favoritefn(props.userID)}>Favorite</Button>

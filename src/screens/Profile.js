@@ -42,7 +42,7 @@ export default function Profile({ navigation }) {
       console.log(authData.token)
       axios.defaults.headers["Authorization"] = "bearer"+authData.token;
       GetUserDetails()
-      GetProfilePicture()
+     // GetProfilePicture()
       // Configure axios headers
       //configureAxiosHeaders(authData.token);
     } catch (err) {
@@ -164,7 +164,8 @@ export default function Profile({ navigation }) {
 
  
     return (
-      
+      <>
+      <BackButton goBack={navigation.goBack} />
       <View style={styles.container}>
          
           <View style={styles.header}></View>
@@ -219,6 +220,7 @@ export default function Profile({ navigation }) {
             </View>
         </View>
       </View>
+      </>
     );
   }
 

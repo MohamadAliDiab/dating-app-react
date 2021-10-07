@@ -34,19 +34,13 @@ export default function Home({ navigation }) {
       </Button>
       <Button
         mode="outlined"
-        onPress={() => navigation.navigate('Connections')}
-      >
-        Connections
-      </Button>
-      <Button
-        mode="outlined"
         onPress={() => navigation.navigate('profile')}
       >
         Profile
       </Button>
       <Button
         mode="outlined"
-        onPress={() => navigation.navigate('Dashboard')}
+        onPress={() => navigation.navigate('notifications')}
       >
         Notifications
       </Button>
